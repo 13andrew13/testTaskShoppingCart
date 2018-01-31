@@ -15,4 +15,25 @@ public class ProductOrder {
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "order_id")
     private Order order;
+
+    public ProductOrder () {
+    }
+
+    public void setAmount (Long amount) {
+        this.amount = amount;
+    }
+
+    public void setProduct (Product product) {
+        this.product = product;
+    }
+
+    public void setOrder (Order order) {
+        this.order = order;
+    }
+
+    public ProductOrder (Long amount, Product product, Order order) {
+        this.amount = amount;
+        this.product = product;
+        this.order = order;
+    }
 }

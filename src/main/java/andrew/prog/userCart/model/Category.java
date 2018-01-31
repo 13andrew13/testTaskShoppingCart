@@ -21,6 +21,9 @@ public class Category {
         this.description = description;
     }
 
+    public Category () {
+    }
+
     public void addProduct (Product product) {
         products.add (product);
         product.setCategory (this);

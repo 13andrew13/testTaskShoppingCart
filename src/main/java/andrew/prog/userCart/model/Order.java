@@ -14,4 +14,11 @@ public class Order {
     private Double cost;
     @OneToMany(fetch = FetchType.LAZY)
     private List<ProductOrder> productList = new ArrayList<ProductOrder> ();
+
+    public Order () {
+    }
+    public void addProductOrder(ProductOrder productOrder){
+        productList.add (productOrder);
+        productOrder.setOrder (this);
+    }
 }
