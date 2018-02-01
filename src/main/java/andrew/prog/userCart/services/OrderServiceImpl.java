@@ -56,7 +56,7 @@ public class OrderServiceImpl implements OrderServcice{
     public Order updateAmountOfProduct(Long oId, Long pId, Long amount){
         productOrderService.updateAmount (pId,amount);
         Order order = orderRepository.findOne (oId);
-        return getSum (order);
+        return orderRepository.save (getSum (order));
 
     }
 }
