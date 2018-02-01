@@ -19,4 +19,5 @@ public class ProductServiceImpl implements ProductService {
     public Product findById (Long id) {
         return productRepository.findOne (id);
     }
+
 }
