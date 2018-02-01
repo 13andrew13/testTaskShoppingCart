@@ -1,5 +1,7 @@
 package andrew.prog.userCart.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.io.Serializable;
 
@@ -13,7 +15,7 @@ public class ProductOrder implements Serializable {
     private Long amount;
     @OneToOne
     private Product product;
-
+    @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "order_id")
     private Order order;
