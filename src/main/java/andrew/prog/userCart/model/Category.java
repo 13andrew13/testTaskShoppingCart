@@ -1,12 +1,13 @@
 package andrew.prog.userCart.model;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
 @Entity
 @Table(name = "CATEGORIES")
-public class Category {
+public class Category implements Serializable {
     @Id
     @GeneratedValue(generator = "CATEGORY_GEN")
     @SequenceGenerator (name = "CATEGORY_GEN")

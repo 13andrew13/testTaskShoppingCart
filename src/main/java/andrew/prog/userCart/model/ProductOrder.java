@@ -1,10 +1,11 @@
 package andrew.prog.userCart.model;
 
 import javax.persistence.*;
+import java.io.Serializable;
 
 @Entity
 @Table(name = "PRODUCT_ORDER")
-public class ProductOrder {
+public class ProductOrder implements Serializable {
     @Id
     @GeneratedValue(generator = "PROD_ORD_GEN")
     @SequenceGenerator (name = "PROD_ORD_GEN")
@@ -12,7 +13,8 @@ public class ProductOrder {
     private Long amount;
     @OneToOne
     private Product product;
-    @ManyToOne(cascade = CascadeType.ALL)
+
+    @ManyToOne
     @JoinColumn(name = "order_id")
     private Order order;
 
@@ -31,9 +33,21 @@ public class ProductOrder {
         this.order = order;
     }
 
-    public ProductOrder (Long amount, Product product, Order order) {
+    public ProductOrder (Long amount, Product product) {
         this.amount = amount;
         this.product = product;
-        this.order = order;
+
+    }
+
+    public Long getAmount () {
+        return amount;
+    }
+
+    public Product getProduct () {
+        return product;
+    }
+
+    public Order getOrder () {
+        return order;
     }
 }

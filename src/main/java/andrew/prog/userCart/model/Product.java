@@ -3,10 +3,11 @@ package andrew.prog.userCart.model;
 
 
 import javax.persistence.*;
+import java.io.Serializable;
 
 @Entity
 @Table(name = "PRODUCTS")
-public class Product {
+public class Product implements Serializable {
     @Id
     @SequenceGenerator (name = "PRODUCT_GEN")
     @GeneratedValue(generator = "PRODUCT_GEN")
@@ -30,5 +31,17 @@ public class Product {
     public void setCategory (Category category) {
         this.category = category;
 
+    }
+
+    public String getName () {
+        return name;
+    }
+
+    public String getDescription () {
+        return description;
+    }
+
+    public Double getPrice () {
+        return price;
     }
 }

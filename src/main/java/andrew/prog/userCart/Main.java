@@ -13,16 +13,12 @@ import org.springframework.context.annotation.ComponentScan;
 @SpringBootApplication
 @ComponentScan("andrew.prog.userCart")
 public class Main {
-    @Autowired
-    CategoryRepository categoryRepository;
-    @Autowired
-    ProductRepository productRepository;
     public static void main (String[] args) {
-
         ConfigurableApplicationContext context = SpringApplication.run (Main.class,args);
         context.getBean (Main.class).run ();
     }
-
+    @Autowired
+    CategoryRepository categoryRepository;
     public void run(){
         Product p1 = new Product ("Phone1","Mobile phones",12.3);
         Product p2 = new Product ("Phone2","Mobile phones",12.3);

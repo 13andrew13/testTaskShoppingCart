@@ -6,25 +6,31 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
-@Controller
+@RestController
+@RequestMapping("/order/")
 public class OrderController{
-    @Qualifier ("orderServiceImpl")
+
     @Autowired
     private OrderServcice orderServcice;
-    @RequestMapping("/add/product/{id}/{amount}")
-    public ModelAndView addProduct(@PathVariable Long id,@PathVariable Long amount, ModelAndView model){
-        Order order;
-        if (model.getModelMap ().containsAttribute ("order")){
-            order = (Order) model.getModel().get ("order");
-        }else {
-            order = new Order();
-        }
-        order = orderServcice.addProductToOrder(order,id,amount);
-        return model;
+
+    @GetMapping("/create")
+    @ResponseBody
+    public Order createOrder(){
+        return orderServcice.createOrder ();
     }
+
+    @GetMapping("{order_id}/produt/{p_id}/amount/{amount}")
+    @ResponseBody
+    public Order addProduct(@PathVariable Long order_id,@PathVariable Long p_id, @PathVariable Long amount){
+        return orderServcice.addProductToOrder (order_id,p_id,amount);
+    }
+
+
+
+
+
 
 }
