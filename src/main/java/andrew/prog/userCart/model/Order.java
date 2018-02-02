@@ -12,15 +12,29 @@ public class Order implements Serializable{
     @SequenceGenerator (name = "ORDER_GEN")
     @GeneratedValue(generator = "ORDER_GEN")
     private Long id;
+
     private Double cost;
+
     @OneToMany(cascade = CascadeType.ALL)
     private List<ProductOrder> productList = new ArrayList<ProductOrder> ();
 
     public Order () {
     }
     public void addProductOrder(ProductOrder productOrder){
-        productList.add (productOrder);
+        if(check (productOrder)){
+            productList.add (productOrder);
+        }
         productOrder.setOrder (this);
+    }
+
+    private boolean check (ProductOrder productOrder) {
+        for (ProductOrder order : productList) {
+            if(order.getProduct ().equals (productOrder.getProduct ())){
+                order.setAmount (order.getAmount ()+productOrder.getAmount ());
+                return false;
+            }
+        }
+        return true;
     }
 
     public List<ProductOrder> getProductList () {
@@ -32,5 +46,9 @@ public class Order implements Serializable{
 
     public void setCost (Double cost) {
         this.cost = cost;
+    }
+
+    public Long getId () {
+        return id;
     }
 }

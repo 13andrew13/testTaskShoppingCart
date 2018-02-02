@@ -11,6 +11,7 @@ public class Product implements Serializable {
     @Id
     @SequenceGenerator (name = "PRODUCT_GEN")
     @GeneratedValue(generator = "PRODUCT_GEN")
+
     private Long id;
     private String name;
     private String description;
@@ -43,5 +44,13 @@ public class Product implements Serializable {
 
     public Double getPrice () {
         return price;
+    }
+
+    public Long getId () {
+        return id;
+    }
+
+    public Category getCategory () {
+        return category;
     }
 }

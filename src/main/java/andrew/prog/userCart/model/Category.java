@@ -11,6 +11,7 @@ public class Category implements Serializable {
     @Id
     @GeneratedValue(generator = "CATEGORY_GEN")
     @SequenceGenerator (name = "CATEGORY_GEN")
+
     private Long id;
     private String name;
     private String description;

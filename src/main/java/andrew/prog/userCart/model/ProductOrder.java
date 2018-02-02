@@ -11,6 +11,7 @@ public class ProductOrder implements Serializable {
     @Id
     @GeneratedValue(generator = "PROD_ORD_GEN")
     @SequenceGenerator (name = "PROD_ORD_GEN")
+
     private Long id;
     private Long amount;
     @OneToOne
@@ -51,5 +52,9 @@ public class ProductOrder implements Serializable {
 
     public Order getOrder () {
         return order;
+    }
+
+    public Long getId () {
+        return id;
     }
 }

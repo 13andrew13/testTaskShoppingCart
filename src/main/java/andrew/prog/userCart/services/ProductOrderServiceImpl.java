@@ -22,6 +22,5 @@ public class ProductOrderServiceImpl implements ProductOrderService{
         ProductOrder pr = repository.findByProduct (productService.findById (product_id));
         pr.setAmount (amount);
         return repository.save (pr);
-
     }
 }

@@ -7,10 +7,7 @@ import andrew.prog.userCart.repositories.OrderRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.awt.*;
-import java.util.ArrayList;
-import java.util.stream.Collector;
-import java.util.stream.Collectors;
+import java.util.List;
 
 @Service
 public class OrderServiceImpl implements OrderServcice{
@@ -25,19 +22,33 @@ public class OrderServiceImpl implements OrderServcice{
     public Order addProductToOrder (Long order, Long id, Long amount) {
         Product product = productService.findById (id);
         Order o = orderRepository.findOne (order);
-        ProductOrder pr = new ProductOrder (amount,product);
-        o.addProductOrder (pr);
+        ProductOrder productOrder = new ProductOrder ();
+        //List<ProductOrder> list = o.getProductList ();
+        /*if(list.isEmpty ()){*/
+            productOrder.setAmount (amount);
+            productOrder.setProduct (product);
+            o.addProductOrder (productOrder);
+     /*   } else {
+            productOrder = list.stream ().filter (x->x.getProduct ().getId ()==id).findFirst ().map ((x) -> {
+                 x.setAmount (x.getAmount () + amount);
+                return x;
+            }).orElseGet (x->)
+            }
+
+        }*/
+
         getSum (o);
         return orderRepository.save (o);
     }
 
-    public Order getSum(Order order){
+    private Order getSum(Order order){
         order.setCost (order.getProductList ().stream ().mapToDouble (x->x.getAmount ()*x.getProduct ().getPrice ()).sum ());
         return order;
     }
     public Order createOrder(){
         Order order = new Order ();
         return orderRepository.save (order);
+
     }
     public Order removeProductFromOrder(Long order, Long pId){
         Order o = orderRepository.findOne (order);
@@ -58,5 +69,10 @@ public class OrderServiceImpl implements OrderServcice{
         Order order = orderRepository.findOne (oId);
         return orderRepository.save (getSum (order));
 
+    }
+
+    @Override
+    public Order getOrderById (Long id) {
+        return orderRepository.findOne (id);
     }
 }
