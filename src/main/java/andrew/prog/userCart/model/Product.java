@@ -9,8 +9,8 @@ import java.io.Serializable;
 @Table(name = "PRODUCTS")
 public class Product implements Serializable {
     @Id
-    @SequenceGenerator (name = "PRODUCT_GEN")
-    @GeneratedValue(generator = "PRODUCT_GEN")
+    @SequenceGenerator (name = "PRODUCT_GEN",sequenceName="PRODUCT_ID_SEQ", allocationSize=1)
+    @GeneratedValue(generator = "PRODUCT_GEN",strategy = GenerationType.SEQUENCE)
 
     private Long id;
     private String name;

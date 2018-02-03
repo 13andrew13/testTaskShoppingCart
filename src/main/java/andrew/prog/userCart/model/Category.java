@@ -9,8 +9,8 @@ import java.util.List;
 @Table(name = "CATEGORIES")
 public class Category implements Serializable {
     @Id
-    @GeneratedValue(generator = "CATEGORY_GEN")
-    @SequenceGenerator (name = "CATEGORY_GEN")
+    @GeneratedValue(generator = "CATEGORY_GEN",strategy = GenerationType.SEQUENCE)
+    @SequenceGenerator (name = "CATEGORY_GEN",sequenceName="CATEGORY_ID_SEQ", allocationSize=1)
 
     private Long id;
     private String name;
