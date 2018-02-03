@@ -1,5 +1,6 @@
 package andrew.prog.userCart.services;
 
+import andrew.prog.userCart.exceptions.NoProductException;
 import andrew.prog.userCart.model.Order;
 import andrew.prog.userCart.model.Product;
 import andrew.prog.userCart.model.ProductOrder;
@@ -18,7 +19,7 @@ public class ProductOrderServiceImpl implements ProductOrderService{
         repository.delete (pr);
     }
 
-    public ProductOrder updateAmount(Long product_id, Long amount){
+    public ProductOrder updateAmount(Long product_id, Long amount) throws NoProductException {
         ProductOrder pr = repository.findByProduct (productService.findById (product_id));
         pr.setAmount (amount);
         return repository.save (pr);

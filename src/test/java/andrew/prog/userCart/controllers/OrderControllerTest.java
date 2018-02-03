@@ -41,36 +41,50 @@ public class OrderControllerTest {
 
 
     @Test
-    public void createOrder () throws Exception {
+    public void createOrderSuccess () throws Exception {
         mockMvc.perform (get("/order/create"))
                 .andExpect (status().isOk ()).andExpect (content ().contentType (MediaType.APPLICATION_JSON_UTF8));
     }
 
 
     @Test
-    public void addProduct () throws Exception {
+    public void addProductSuccess () throws Exception {
         ResponseEntity<Order> response = restTemplate.getForEntity ("/order/2/add/product/2/amount/2",Order.class);
         assertThat (response.getBody ().equals (orderServcice.getOrderById (2L)));
     }
     @Test
-    public void updateAmountOfProducts () throws Exception {
+    public void updateAmountOfProductsSuccess () throws Exception {
         ResponseEntity<Order> response = restTemplate.getForEntity ("/order/2/update/product/2/amount/5",Order.class);
         assertThat (response.getBody ().equals (orderServcice.getOrderById (2L)));
     }
 
     @Test
-    public void removeProduct () throws Exception {
-
+    public void removeProductSuccess () throws Exception {
             ResponseEntity<Order> response = restTemplate.getForEntity ("/order/2/remove/product/2",Order.class);
             assertThat (response.getBody ().equals (orderServcice.getOrderById (2L)));
-
     }
 
 
     @Test
-    public void getOrder () throws Exception {
+    public void getOrderSuccess () throws Exception {
         ResponseEntity<Order> responseEntity = restTemplate.getForEntity ("/order/get/2",Order.class);
         assertThat (responseEntity.getBody ().equals (new Order ()));
     }
+    @Test
+    public void addProductException() throws Exception {
+        ResponseEntity<Order> response = restTemplate.getForEntity ("/order/2/add/product/25/amount/2",Order.class);
+        assertThat (response.getBody ().equals (orderServcice.getOrderById (2L)));
+    }
+    @Test
+    public void updateAmountOfProductsException () throws Exception {
+        ResponseEntity<Order> response = restTemplate.getForEntity ("/order/25/update/product/2/amount/5",Order.class);
+        assertThat (response.getBody ().equals (orderServcice.getOrderById (2L)));
+    }
+    @Test
+    public void removeProductException () throws Exception {
+        ResponseEntity<Order> response = restTemplate.getForEntity ("/order/2/remove/product/15",Order.class);
+        assertThat (response.getBody ().equals (orderServcice.getOrderById (2L)));
+    }
+
 
 }
