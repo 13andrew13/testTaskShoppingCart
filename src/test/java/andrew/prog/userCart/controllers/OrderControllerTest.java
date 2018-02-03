@@ -1,5 +1,6 @@
 package andrew.prog.userCart.controllers;
 
+import andrew.prog.userCart.exceptions.NoOrderException;
 import andrew.prog.userCart.model.Order;
 import andrew.prog.userCart.services.OrderServcice;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -73,17 +74,17 @@ public class OrderControllerTest {
     @Test
     public void addProductException() throws Exception {
         ResponseEntity<Order> response = restTemplate.getForEntity ("/order/2/add/product/25/amount/2",Order.class);
-        assertThat (response.getBody ().equals (orderServcice.getOrderById (2L)));
+        assertThat (response.getBody ().equals (new NoOrderException ("There is no Order")));
     }
     @Test
     public void updateAmountOfProductsException () throws Exception {
         ResponseEntity<Order> response = restTemplate.getForEntity ("/order/25/update/product/2/amount/5",Order.class);
-        assertThat (response.getBody ().equals (orderServcice.getOrderById (2L)));
+        assertThat (response.getBody ().equals (new NoOrderException ("There is no Order")));
     }
     @Test
     public void removeProductException () throws Exception {
         ResponseEntity<Order> response = restTemplate.getForEntity ("/order/2/remove/product/15",Order.class);
-        assertThat (response.getBody ().equals (orderServcice.getOrderById (2L)));
+        assertThat (response.getBody ().equals (new NoOrderException ("There is no Order")));
     }
 
 
