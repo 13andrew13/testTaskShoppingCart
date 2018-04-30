@@ -3,8 +3,8 @@ pipeline {
     stages {
         stage('Build') {
             steps {
-                sh 'apt-get install maven'
-                sh 'mvn -B -DskipTests clean package'
+
+                sh './mvnw pac-B -DskipTests clean package'
             }
         }
     }
