@@ -1,4 +1,4 @@
-piplene {
+pipeline {
     agent any
     stages{
         stage('Build'){
@@ -12,6 +12,5 @@ piplene {
                 sh 'docker run -i -t myapp:latest'
             }
         }
-
     }
 }
