@@ -9,7 +9,6 @@ pipeline {
         stage('Build docker image'){
             steps{
                 sh "docker build -t 'myapp:dockerfile'"
-                sh 'docker run -i -t myapp:latest'
             }
         }
     }
